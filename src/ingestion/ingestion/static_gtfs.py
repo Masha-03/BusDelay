@@ -4,8 +4,8 @@ import pandas as pd
 
 
 def download_static_gfts (category: str, dest_zip: str) -> None:
-    response = requests.get("https://api.data.gov.my/gtfs-realtime/vehicle-position/prasarana",
-                            params = {"category": category}
+        response = requests.get( "https://api.data.gov.my/gtfs-static/prasarana",
+        params={"category": category}
     )
     with open(dest_zip, "wb") as f:
         f.write(response.content)
