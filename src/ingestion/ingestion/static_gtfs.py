@@ -5,10 +5,9 @@ import pandas as pd
 
 def download_static_gfts (category: str, dest_zip: str) -> None:
         response = requests.get( "https://api.data.gov.my/gtfs-static/prasarana",
-        params={"category": category}
-    )
-    with open(dest_zip, "wb") as f:
-        f.write(response.content)
+        params={"category": category})
+        with open(dest_zip, "wb") as f:
+            f.write(response.content)
 
 
 def extract_gtfs_zip(zip_path: str, extract_to: str) -> None:

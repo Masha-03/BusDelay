@@ -1,5 +1,8 @@
 import requests
 import pandas as pd
+from google.transit import gtfs_realtime_pb2
+from datetime import datetime
+import os
 
 def fetch_raw_feed(category: str) -> bytes : # returning realtime data in bytes
     response = requests.get(
@@ -9,14 +12,12 @@ def fetch_raw_feed(category: str) -> bytes : # returning realtime data in bytes
     response.raise_for_status # throws an error if the request failed
     return response.content
 
-from google.transit import gtfs_realtime_pb2
 
 def decode_feed(raw_bytes :  bytes) -> gtfs_realtime_pb2.FeedMessage :
     feed = gtfs_realtime_pb2.FeedMessage()
     feed.ParseFromString(raw_bytes)
     return feed
 
-from datetime import datetime
 
 def feed_to_dataframe(feed: gtfs_realtime_pb2.FeedMessage) -> pd.DataFrame:
     rows = []
@@ -35,7 +36,6 @@ def feed_to_dataframe(feed: gtfs_realtime_pb2.FeedMessage) -> pd.DataFrame:
         })
     return pd.DataFrame(rows)
 
-import os
 
 def save_snapshot(df: pd.DataFrame, out_dir: str) -> None:
     os.makedirs(out_dir, exist_ok=True)
