@@ -1,4 +1,5 @@
 import requests
+from src.ingestion.weather import get_weather_data
 
 RT_URL = "https://api.data.gov.my/gtfs-realtime/vehicle-position/prasarana?category=rapid-bus-kl"
 STATIC_URL = "https://api.data.gov.my/gtfs-static/prasarana?category=rapid-bus-kl"
@@ -6,8 +7,6 @@ STATIC_URL = "https://api.data.gov.my/gtfs-static/prasarana?category=rapid-bus-k
 rt_response = requests.get(RT_URL)
 static_response = requests.get(STATIC_URL)
 
-print("Realtime status:", rt_response.status_code)
-print("Realtime type:", rt_response.headers.get("Content-Type"))
+weather_df = get_weather_data()
 
-print("Static status:", static_response.status_code)
-print("Static type:", static_response.headers.get("Content-Type"))
+print(weather_df.head())
