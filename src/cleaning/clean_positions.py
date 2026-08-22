@@ -93,5 +93,3 @@ def clean_vehicle_positions(raw_dir: str, static_routes: pd.DataFrame) -> pd.Dat
     df = validate_route_ids(df, static_routes)
     logger.info(f"Final clean dataset: {len(df)} rows")
     return df
-
-print('hi')
