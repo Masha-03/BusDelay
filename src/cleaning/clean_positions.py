@@ -4,7 +4,7 @@ import glob
 import logging
 import pandas as pd
 import pytz
-from src.cleaning.geo_utils import implied_speed_kmh
+from geo_utils import implied_speed_kmh
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -93,3 +93,5 @@ def clean_vehicle_positions(raw_dir: str, static_routes: pd.DataFrame) -> pd.Dat
     df = validate_route_ids(df, static_routes)
     logger.info(f"Final clean dataset: {len(df)} rows")
     return df
+
+print('hi')
